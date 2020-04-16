@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 
 
 const Router = require('./routes/index')
- const key = require('./config/key').DATABASE_URL
+ const key = require('./config/key')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -18,7 +18,7 @@ app.use(expressLayouts)
 app.use(express.static('public'))
 
 
-mongoose.connect(key, {useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(key.MongoURI, {useNewUrlParser:true, useUnifiedTopology:true})
 .then(()=>console.log('MongoDB connected'))
 .catch(err=>console.log('Error: ', err))
 app.use('/', Router)
